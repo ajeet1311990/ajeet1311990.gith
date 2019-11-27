@@ -1,0 +1,57 @@
+Provisioning :- setup new server for production.
+what is Docker and why come i market  :-  we can not run multiple application on single os that why we create multiple vm which is more costly
+for the Organisation then docker come in market which we deploy on the single os without libary confilict it take name space in single os.
+Docker architecture :- 
+Docker Host  :-
+Docker community :- Docker (CE,EE) , RedHat ( atomic host)
+Docker Image :- it is the set of binary or libary file which run application.
+   1) .  Micro Image
+   2) . 
+Docker image ragistory server is the refercen of docker image.
+       docker.io
+       rigstory.access.redhat.com
+Docker contaner :- it is the running mod of docker image.
+we can depoly multiple contner by using single image.
+
+ Docker Installation & Manage Docker Images & continer Commands .
+ yum update -y
+yum install docker
+systemctl start docker
+systemctl enable docker
+docker images              [ check how many images in OS ]
+docker ps                  [ how many contner running stage ]
+docker ps -a               [ how many contner running and also stop mod ]
+docker search nginx        [ search all image is i docker community ]
+docker pull nginx          [ Download latest nginx version avalibaly in docker comminte ]
+docker pull mysql:5.6      
+docker pull centos         [ Download centos base image ]
+How to deploy continer : -
+we can depoly continer two type
+1) service mode  o/r Deaman mode o/r Detach mode
+2) instraction mode o/r root mode
+
+docker run -it --name=con1 centos:latest
+docker top con1         [check how many process running in the contner ]
+ docker exec -it con2 /bin/bash   [ /bin/bash exectute new shell ]
+
+A contner will always stop if any process not running in it.
+docker attach con2       [ enter in docker contener if it is runing ]
+ctrl+ps     [ also can exit without stop /bin/bash ]
+docker stop con2
+docker rm con1
+
+How to depoly contner in damane mode.
+ 
+ docker run -d --name mysql-con -e MYSQL_ROOT_PASSWORD=redhat mysql:latest
+docker ps
+docker top mysql-con
+
+we con not get terminal mod for mysql contner because it have not /bin/bash   but we can use it as DB server for loging ->
+docker  exec -it mysql-con /bin/bash
+mysql -u root -p                 [ for loging mysql]
+docker stop mysql-con
+docker rm mysql-con
+
+ 
+
+
