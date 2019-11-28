@@ -35,6 +35,7 @@ docker top con1         [check how many process running in the contner ]
  docker exec -it con2 /bin/bash   [ /bin/bash exectute new shell ]
 
 A contner will always stop if any process not running in it.
+docker start con2    [for start   stop contner]
 docker attach con2       [ enter in docker contener if it is runing ]
 ctrl+ps     [ also can exit without stop /bin/bash ]
 docker stop con2
@@ -53,5 +54,108 @@ docker stop mysql-con
 docker rm mysql-con
 
  
+docker rm $(docker ps -q -a)                [ for delete all contner in one time ]
+docker stop $(docker ps -q -a)              [ stop all contener in one time ]
+docker rm -f webserver                      [ delete contner is in running mode ]
+docker rm  web                              [ delete cotener ]
+docker  rmi 7645sdbb41c89(id)               [ delete image ]
+
+Docker commit :- 
+
+docker work like git  so if we want store some data in docker contner we have to commit this and it create new docker image whic have your data for this .
+docker run -it --name con1 centos:latest
+vi test
+docker commit -m "file name" con1 centos:v1
+docker images
+docker stop cen1
+docker rm cen1
+docker run -it --name con2 centos:v1
+
+How to  provision new image  [ httpd based software ]
+
+docker run -it --name web centos:latest
+yum install httpd -y
+cd /var/www/html/
+echo helloworld > index.html
+ls
+docker commit -m "apache installed" web centos:httpd
+docker images
+docker history 40a7009fd45a
+
+cat index.html
+rpm -qa httpd
+/usr/bin/httpd        [ for start httpd service in contenar ]
+or
+apachectl
+For check  contner IP
+yum install net-tools -y
+ifconfig
+curl 172.17.o.2
+
+How to access contner from external network
+ For use external network we have to bind contner port to base machin port ( Port fording )
+     or 
+without doing port forwording contner to base machin external traffic never come.
+
+docker run -it -p 85:80 --name con1 centos:httpd
+for check out side exit on base machin and run
+netstat -tnlp | grep docker-proxy
+docker ps
+in URL copy pest base machin public IP : port  like
+[ 13.223.124.94:85 ]     URL
+
+how to loging docker cotner out side  { aagain do port forwordig for SSH }
+docker run -it -p 24:22 --name remote-server centos:latest
+ rpm -qa openssh-server
+     yum install openssh-server -y
+     rpm -qa openssh-server
+     useradd ajeet
+     passwd ajeet
+     yum install passwd
+     passwd ajeet
+     /usr/sbin/sshd
+     ssh-keygen -f /etc/ssh/ssh_host_rsa_key
+     ssh-keygen -f /etc/ssh/ssh_host_ecdsa_key
+     ssh-keygen -f  /etc/ssh/ssh_host_ed25519_key
+     /usr/sbin/sshd
+on putty
+ base machin publice ip   24 [port]
+check how many port regrved for docker
+netstat -tnlp | grep docker-proxy
+How to provision new image from docker file
+mkdir apache
+cd apache
+vi dockerfile
+FROM    centos:latest
+MAINTAINER      Ajeet@localhost
+RUN     yum install httpd -y
+ADD     http://www.krnetworkcloud.org/devops.php /root
+COPY    index.html /var/www/html
+ENV     port 80
+EXPOSE  80
+CMD     /usr/sbin/httpd -DFOREGROUND
+
+
+docker build -t centos:apache  .
+docker image
+docker run -dp --name=test centos:apache  ( it will port binding auto matice )
+docker ps
+curl localhost:32772--> difault port
+we always build docker file for do provision i one time
+Docker file parametar
+FROM    
+MAINTAINER      
+RUN     
+ADD     
+COPY    
+ENV     
+EXPOSE  
+CMD     
+Docker volume :-    
+docker run -d -v /home/ec2-user/apache/:/etc/abc/ --name=test1 centos:latest
+     
+
+
+
 
 
