@@ -71,7 +71,10 @@ docker stop cen1
 docker rm cen1
 docker run -it --name con2 centos:v1
 
-How to  provision new image  [ httpd based software ]
+How to  provision new image  [ httpd based software ] 
+two type
+1)  manually
+2) automatically:docker file
 
 docker run -it --name web centos:latest
 yum install httpd -y
