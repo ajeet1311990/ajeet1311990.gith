@@ -153,10 +153,38 @@ ADD
 COPY    
 ENV     
 EXPOSE  
-CMD     
-Docker volume :-    
-docker run -d -v /home/ec2-user/apache/:/etc/abc/ --name=test1 centos:latest
-     
+CMD    
+OVERLAYfs   is docker image file system.
+By difault contner root file system is /var/lib/docker/volue    (native place )
+Docker Volume :-
+we can creater docker volume tow type
+Selinux always not allow volume mount for docker contner
+for solustion
+1)  desable selinux 
+# seteforce 0
+ docker run -d -v /storage:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=redhat mysql:latest
+ docker exec -it 7bed06c76 /bin/bash
+
+
+mysql -u root -p
+password :
+create database abc;
+creare database xyz;
+GO to host
+ls /storage
+ docker ps
+ docker rm -f 7bed06c7670a
+ ls /storage/
+ docker run -d -v /storage:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=redhat mysql:latest
+ docker exec -it c42270b671
+ docker exec -it c42270b671 /bin/bash
+mysql -u root -p
+password :
+show databases;
+2)  how to resolve selinux problem ( selinux is in inforce mode)  
+# seteforce 1
+first create contner without volume 
+
 
 
 
