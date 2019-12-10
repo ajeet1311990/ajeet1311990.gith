@@ -143,6 +143,38 @@ heare we found DNS auto maticaly up because network depoly.
     kubectl run test --image=mysql -o json --dry-run > is.json
     kubectl create -f is.yml 
     kubectl get deployment
+    
+        rm -rf is.yml
+    kubectl get deployment test -o yaml > is.yml
+    vim is.yml
+    kubectl apply -f is.yml
+
+service : it provide single endpoint to access deployment pod
+Kind of act as balancer ip
+Qproxy is use for balancer 
+we will setup single ip for multple pod for blancer
+Service :
+Internal use :
+External use :
+
+kubectl expose deployment test  --pord=80
+kubectl get service
+kubectl exec -it test-f5666fbf9-2mc2g /bin/bash
+echo pod1 > /var/www/html/index.html
+exit
+curl 10.107.1.61
+kubectl describe service test
+kubectl scale --repliacas=3 deployment test
+kubectl describe service test
+kubectl get service test -o yaml > is.yml
+kubectl delete service test
+vim is.yml
+kubectl create -f is.yml
+kubectl get service 
+kubectl delete service test
+kubectl expose deployment test --port=80 --type=NodePort
+kubectl get service 
+
 
 
 
@@ -158,13 +190,9 @@ heare we found DNS auto maticaly up because network depoly.
 
  
 
-Promathises 
 
-kubectl get node
-
-add one more node
  
-setup kubernet POD Network
+
 
 
 
