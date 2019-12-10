@@ -53,16 +53,20 @@ gpgcheck=0
  
 cat /etc/yum.repo.d
 
-yum install docker kubadm -y
-systemctl start kubelet
+yum install docker kubeadm -y
 systemctl start kubelet docker
 systemctl enable kubelet docker
 
-kubadm init 
+kubeadm init 
 kubadm init ignore-preflight-errar-all
 
 mkdir .kube
 cp -i /etc/kubernetes/admin.conf $home/.kube/config    ( copy it to master user profile) 
+
+mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
 
 three methord work on kubernet
 
@@ -71,10 +75,10 @@ three methord work on kubernet
 3) File methord (yaml)
 
 kubeadm token list     ( show token list )
-kubctl get pod
-kubctl get namespace
+kubectl get pod
+kubectl get namespace
 
-kubctl get pod -n kube-system
+kubectl get pod -n kube-system
 
 
 if we setup with kubeadm it always setup internal DNS ( with A record )
@@ -89,118 +93,56 @@ baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
 enabled=1
 gpgcheck=0
 
-yum install docker kubadm -y
+yum install docker kubeadm -y
 systemctl start kubelet
 systemctl start kubelet docker
 systemctl enable kubelet docker
 
-kubeadm join IP:6443 --token ********* --discovery-token-ca-cert-hash ***************
- on master Kubernetes :- it provide high availability and centralise management  capability  over the contener technology .
-Adavantag : 
-1)  centerlise management 
-2) maintene high_availabilty ( node lable /contner lable )
-3) scalability ( manual / automatically)
-4 ) project lable isolation
-5 ) user level role access.
-6 ) CPU /memory level quota apply
-7 ) POD scheduling
-8 ) rolingupgrade
+kubeadm join 172.31.30.228:6443 --token yuvbxi.yc6mrndw22p6rumd \
+    --discovery-token-ca-cert-hash sha256:42833a1689d08c84d3de10712067d2e6da7e43fe35a2cfd24602b8d13bdcda70 
+   
+kubectl get node     ( check how many node connect to the master )
 
-1) Kubernetes master
+POD Network setup   with SDN technolgy ( depolying network switch pod comunition )
 
-2) Kubernetes Node /minion /worker
-1 ) Kubernetes master 
-
-we have  4 service running on kubernetes master 3 for NODE 
-
-1) kube-api service : it handel all communication channel into kubernetes  
-   example : service to service / user authentication / authrization /role
-2) kube-etcd  : is yaml  based database. it container kubernetes data in persistent form we have always take backup this
-3) kube-controller : it handel communication with every kube-node using api with kubelet
-4) kube-scheduler  :  it determin best fit node for container.
+ weave network create in kubernetes (google it )
  
-user - command-api --tecd -- controller -- kubelet- docker- container
+ copy pest 
+$ kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
 
-2 ) Kubernetes Node /minion /worker
+ip a s weave   ( check weave network setup on node )
+kubectl get pod -n kube-system   ( check on master it depoly new pod for weave network )
+heare we found DNS auto maticaly up because network depoly.
 
-1) Docker
-2) Kubelet
-3) kubeproxy
-
-Quick installatation using kubeadm  utility/control plain installation
-
-Hardway installation ( every component manual method )
-lab setup 
-master : kubeadm/docker
-command : kubeadm init
-
-node1 : kubeadm/docker 
-node2 : kubeadm/docker
-
-kubeadm is installation utility
-https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
-copy peston desktop
-
-cat <<EOF > /etc/yum.repos.d/kubernetes.repo
-[kubernetes]
-name=Kubernetes
-baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
-enabled=1
-gpgcheck=0
- 
-cat /etc/yum.repo.d
-
-yum install docker kubadm -y
-systemctl start kubelet
-systemctl start kubelet docker
-systemctl enable kubelet docker
-
-kubadm init 
-kubadm init ignore-preflight-errar-all
-
-mkdir .kube
-cp -i /etc/kubernetes/admin.conf $home/.kube/config    ( copy it to master user profile) 
-
-three methord work on kubernet
-
-1) Kubctl
-2) GUI
-3) File methord (yaml)
-
-kubeadm token list     ( show token list )
-kubctl get pod
-kubctl get namespace
-
-kubctl get pod -n kube-system
-
-
-if we setup with kubeadm it always setup internal DNS ( with A record )
- 
-SetUp NODE : -
-Node 1 
-
-cat <<EOF > /etc/yum.repos.d/kubernetes.repo
-[kubernetes]
-name=Kubernetes
-baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
-enabled=1
-gpgcheck=0
-
-yum install docker kubadm -y
-systemctl start kubelet
-systemctl start kubelet docker
-systemctl enable kubelet docker
-
-kubeadm join IP:6443 --token ********* --discovery-token-ca-cert-hash ***************
- on master 
-
-kubectl get node
-
-add one more node
- 
-setup kubernet POD Network
-
-
+ kubectl create namespace prod
+    kubectl create namespace dev
+    kubectl create namespace stage
+    kubectl run test --image=mysql:letest -n prod
+    kubectl get deployment
+    kubectl run test --image=mysql:letest
+    kubectl get deployment
+    kubectl get pod
+    kubectl get pod -o wide
+    kubectl delete deployment test
+    kubectl run test --image:mysql --replicas=2
+    kubectl run test --image=mysql:letest --replicas=2
+    kubectl get pod
+    kubectl run test --image=mysql:letest --replicas=2
+    kubectl get pod
+    kubectl delete pod test-557686b896-qfj4g 
+    kubectl get pod
+    kubectl scale --replicas=3 deployment test
+    kubectl get pod
+    kubectl describe deployment test
+    kubectl edit deployment test
+    kubectl get pod
+    kubectl get namespace
+    kubectl get pod
+    kubectl delete deployment test
+    kubectl run test --image=mysql -o yaml --dry-run > is.yml
+    kubectl run test --image=mysql -o json --dry-run > is.json
+    kubectl create -f is.yml 
+    kubectl get deployment
 
 
 
