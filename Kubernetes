@@ -1,0 +1,243 @@
+Kubernetes :- it provide high availability and centralise management  capability  over the contener technology .
+Adavantag : 
+1)  centerlise management 
+2) maintene high_availabilty ( node lable /contner lable )
+3) scalability ( manual / automatically)
+4 ) project lable isolation
+5 ) user level role access.
+6 ) CPU /memory level quota apply
+7 ) POD scheduling
+8 ) rolingupgrade
+
+1) Kubernetes master
+
+2) Kubernetes Node /minion /worker
+1 ) Kubernetes master 
+
+we have  4 service running on kubernetes master 3 for NODE 
+
+1) kube-api service : it handel all communication channel into kubernetes  
+   example : service to service / user authentication / authrization /role
+2) kube-etcd  : is yaml  based database. it container kubernetes data in persistent form we have always take backup this
+3) kube-controller : it handel communication with every kube-node using api with kubelet
+4) kube-scheduler  :  it determin best fit node for container.
+ 
+user - command-api --tecd -- controller -- kubelet- docker- container
+
+2 ) Kubernetes Node /minion /worker
+
+1) Docker
+2) Kubelet
+3) kubeproxy
+
+Quick installatation using kubeadm  utility/control plain installation
+
+Hardway installation ( every component manual method )
+lab setup 
+master : kubeadm/docker
+command : kubeadm init
+
+node1 : kubeadm/docker 
+node2 : kubeadm/docker
+
+kubeadm is installation utility
+https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
+copy peston desktop
+
+cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=0
+ 
+cat /etc/yum.repo.d
+
+yum install docker kubadm -y
+systemctl start kubelet
+systemctl start kubelet docker
+systemctl enable kubelet docker
+
+kubadm init 
+kubadm init ignore-preflight-errar-all
+
+mkdir .kube
+cp -i /etc/kubernetes/admin.conf $home/.kube/config    ( copy it to master user profile) 
+
+three methord work on kubernet
+
+1) Kubctl
+2) GUI
+3) File methord (yaml)
+
+kubeadm token list     ( show token list )
+kubctl get pod
+kubctl get namespace
+
+kubctl get pod -n kube-system
+
+
+if we setup with kubeadm it always setup internal DNS ( with A record )
+ 
+SetUp NODE : -
+Node 1 
+
+cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=0
+
+yum install docker kubadm -y
+systemctl start kubelet
+systemctl start kubelet docker
+systemctl enable kubelet docker
+
+kubeadm join IP:6443 --token ********* --discovery-token-ca-cert-hash ***************
+ on master Kubernetes :- it provide high availability and centralise management  capability  over the contener technology .
+Adavantag : 
+1)  centerlise management 
+2) maintene high_availabilty ( node lable /contner lable )
+3) scalability ( manual / automatically)
+4 ) project lable isolation
+5 ) user level role access.
+6 ) CPU /memory level quota apply
+7 ) POD scheduling
+8 ) rolingupgrade
+
+1) Kubernetes master
+
+2) Kubernetes Node /minion /worker
+1 ) Kubernetes master 
+
+we have  4 service running on kubernetes master 3 for NODE 
+
+1) kube-api service : it handel all communication channel into kubernetes  
+   example : service to service / user authentication / authrization /role
+2) kube-etcd  : is yaml  based database. it container kubernetes data in persistent form we have always take backup this
+3) kube-controller : it handel communication with every kube-node using api with kubelet
+4) kube-scheduler  :  it determin best fit node for container.
+ 
+user - command-api --tecd -- controller -- kubelet- docker- container
+
+2 ) Kubernetes Node /minion /worker
+
+1) Docker
+2) Kubelet
+3) kubeproxy
+
+Quick installatation using kubeadm  utility/control plain installation
+
+Hardway installation ( every component manual method )
+lab setup 
+master : kubeadm/docker
+command : kubeadm init
+
+node1 : kubeadm/docker 
+node2 : kubeadm/docker
+
+kubeadm is installation utility
+https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
+copy peston desktop
+
+cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=0
+ 
+cat /etc/yum.repo.d
+
+yum install docker kubadm -y
+systemctl start kubelet
+systemctl start kubelet docker
+systemctl enable kubelet docker
+
+kubadm init 
+kubadm init ignore-preflight-errar-all
+
+mkdir .kube
+cp -i /etc/kubernetes/admin.conf $home/.kube/config    ( copy it to master user profile) 
+
+three methord work on kubernet
+
+1) Kubctl
+2) GUI
+3) File methord (yaml)
+
+kubeadm token list     ( show token list )
+kubctl get pod
+kubctl get namespace
+
+kubctl get pod -n kube-system
+
+
+if we setup with kubeadm it always setup internal DNS ( with A record )
+ 
+SetUp NODE : -
+Node 1 
+
+cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=0
+
+yum install docker kubadm -y
+systemctl start kubelet
+systemctl start kubelet docker
+systemctl enable kubelet docker
+
+kubeadm join IP:6443 --token ********* --discovery-token-ca-cert-hash ***************
+ on master 
+
+kubectl get node
+
+add one more node
+ 
+setup kubernet POD Network
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+Promathises 
+
+kubectl get node
+
+add one more node
+ 
+setup kubernet POD Network
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+Promathises 
