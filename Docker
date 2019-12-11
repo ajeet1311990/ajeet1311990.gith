@@ -1,11 +1,12 @@
 Provisioning :- setup new server for production.
-what is Docker and why come i market  :-  we can not run multiple application on single os that why we create multiple vm which is more costly
-for the Organisation then docker come in market which we deploy on the single os without libary confilict it take name space in single os.
+what is Docker and why come i market  :-  we can not run multiple application on single os that why 
+we create multiple vm which is more costly for the Organisation then docker come in market which 
+we deploy on the single os without libary confilict it take name space in single os.
 Docker architecture :- 
 Docker Host  :-  users are docker host
 Docker community :- Docker (CE,EE) , RedHat ( atomic host)
 Docker Image :- it is the set of binary or libary file which run application.
-   1) .  Micro Image
+   1) .  Micro Image / base image 
    2) . 
 Docker image ragistory server is the refercen of docker image.
        docker.io
@@ -62,7 +63,8 @@ docker  rmi 7645sdbb41c89(id)               [ delete image ]
 
 Docker commit :- 
 
-docker work like git  so if we want store some data in docker contner we have to commit this and it create new docker image whic have your data for this .
+docker work like git  so if we want store some data in docker contner we have to commit this and it create new docker image
+whic have your data for this .
 docker run -it --name con1 centos:latest
 vi test
 docker commit -m "file name" con1 centos:v1
