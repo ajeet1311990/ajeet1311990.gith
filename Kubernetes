@@ -22,7 +22,7 @@ we have  4 service running on kubernetes master 3 for NODE
 3) kube-controller : it handel communication with every kube-node using api with kubelet
 4) kube-scheduler  :  it determin best fit node for container.
  
-user - command-api --tecd -- controller -- kubelet- docker- container
+user - command-api --etcd -- controller -- kubelet- docker- container
 
 2 ) Kubernetes Node /minion /worker
 
@@ -50,6 +50,7 @@ name=Kubernetes
 baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
 enabled=1
 gpgcheck=0
+EOF
  
 cat /etc/yum.repo.d
 
@@ -92,6 +93,7 @@ name=Kubernetes
 baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
 enabled=1
 gpgcheck=0
+EOF
 
 yum install docker kubeadm -y
 systemctl start kubelet
@@ -117,17 +119,13 @@ heare we found DNS auto maticaly up because network depoly.
  kubectl create namespace prod
     kubectl create namespace dev
     kubectl create namespace stage
-    kubectl run test --image=mysql:letest -n prod
-    kubectl get deployment
-    kubectl run test --image=mysql:letest
+    kubectl run test --image=nginex:latest -n prod
+    kubectl run test --image=nginex:latest
     kubectl get deployment
     kubectl get pod
     kubectl get pod -o wide
     kubectl delete deployment test
-    kubectl run test --image:mysql --replicas=2
-    kubectl run test --image=mysql:letest --replicas=2
-    kubectl get pod
-    kubectl run test --image=mysql:letest --replicas=2
+    kubectl run test --image=nginex:latest --replicas=2
     kubectl get pod
     kubectl delete pod test-557686b896-qfj4g 
     kubectl get pod
@@ -139,8 +137,8 @@ heare we found DNS auto maticaly up because network depoly.
     kubectl get namespace
     kubectl get pod
     kubectl delete deployment test
-    kubectl run test --image=mysql -o yaml --dry-run > is.yml
-    kubectl run test --image=mysql -o json --dry-run > is.json
+    kubectl run test  --image=nginex:latest -o yaml --dry-run > is.yml
+    kubectl run test  --image=nginex:latest-o json --dry-run > is.json
     kubectl create -f is.yml 
     kubectl get deployment
     
@@ -157,7 +155,7 @@ Service :
 Internal use :
 External use :
 
-kubectl expose deployment test  --pord=80
+kubectl expose deployment test  --port=80
 kubectl get service
 kubectl exec -it test-f5666fbf9-2mc2g /bin/bash
 echo pod1 > /var/www/html/index.html
