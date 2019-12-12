@@ -125,6 +125,26 @@ docker run -it -p 24:22 --name remote-server centos:latest
      /usr/sbin/sshd
 on putty
  base machin publice ip   24 [port]
+ ___________________________________________________________
+yum install pam_* -y
+ssh -p 24 root@3.15.27.154 
+------------------------------------------------------------------------------ 
+ Solution:
+
+FROM centos
+RUN yum -y install openssh-server
+RUN useradd remote_user && \
+    echo remote_user:1234 | chpasswd && \
+    mkdir /home/remote_user/.ssh && \
+    chmod 700 /home/remote_user/.ssh
+COPY remote-key.pub /home/remote_user/.ssh/authorized_keys
+RUN chown remote_user:remote_user -R /home/remote_user/.ssh && \
+    chmod 600 /home/remote_user/.ssh/authorized_keys
+RUN /usr/bin/ssh-keygen -A
+EXPOSE 22
+RUN rm -rf /run/nologin
+CMD /usr/sbin/sshd -D
+-----------------------------------------------------------------------------------
 check how many port regrved for docker
 netstat -tnlp | grep docker-proxy
 How to provision new image from docker file
