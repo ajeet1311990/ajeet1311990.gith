@@ -45,7 +45,7 @@ docker stop con2
 docker rm con1
 
 How to depoly contner in damane mode.
- 
+ .
  docker run -d --name mysql-con -e MYSQL_ROOT_PASSWORD=redhat mysql:latest
 docker ps
 docker top mysql-con  (show running process in contner)
