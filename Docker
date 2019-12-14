@@ -13,7 +13,7 @@ Docker image ragistory server is the refercen of docker image.
        rigstory.access.redhat.com
 Docker contaner :- it is the running mod of docker image.
 we can depoly multiple contner by using single image.
-
+Ctrl + pq   use to logout the contner with out kill process /bin/bash
  Docker Installation & Manage Docker Images & continer Commands .
  yum update -y
 yum install docker
@@ -21,7 +21,8 @@ systemctl start docker
 systemctl enable docker
 docker images              [ check how many images in OS ]
 docker ps                  [ how many contner running stage ]
-docker ps -a               [ how many contner running and also stop mod ]
+docker ps -a               [ how many contner running and also stop mod  also show contner id] 
+For show manul patch contner id is   /var/lib/docker/containers/
 docker search nginx        [ search all image is i docker community ]
 docker pull nginx          [ Download latest nginx version avalibaly in docker comminte ]
 docker pull mysql:5.6      
@@ -30,8 +31,9 @@ How to deploy continer : -
 we can depoly continer two type
 1) service mode  o/r Deaman mode o/r Detach mode
 2) instraction mode o/r root mode
-
-docker run -it --name=con1 centos:latest
+docker run -d webserver nginx:latest   ( -d damen mode/Detach mode contner run in backend (-d is only damen contert)
+docker exec -it webserver /bin/bash       (-it intrection terminal foe enter damen contner and execute /bin/bash )
+docker run -it --name=con1 centos:latest  ( root mode contner  ( when ever you want to entrat as a root account us -it optison ) 
 docker top con1         [check how many process running in the contner ]
  docker exec -it con2 /bin/bash   [ /bin/bash exectute new shell ]
 
@@ -46,7 +48,7 @@ How to depoly contner in damane mode.
  
  docker run -d --name mysql-con -e MYSQL_ROOT_PASSWORD=redhat mysql:latest
 docker ps
-docker top mysql-con
+docker top mysql-con  (show running process in contner)
 
 we con not get terminal mod for mysql contner because it have not /bin/bash   but we can use it as DB server for loging ->
 docker  exec -it mysql-con /bin/bash
@@ -73,7 +75,7 @@ docker stop cen1
 docker rm cen1
 docker run -it --name con2 centos:v1
 
-How to  provision new image  [ httpd based software ] 
+How to  provision new  Docker image  [ httpd based software ] 
 two type
 1)  manually
 2) automatically:docker file
@@ -145,7 +147,7 @@ EXPOSE 22
 RUN rm -rf /run/nologin
 CMD /usr/sbin/sshd -D
 -----------------------------------------------------------------------------------
-check how many port regrved for docker
+check how many port reserve for docker
 netstat -tnlp | grep docker-proxy
 How to provision new image from docker file
 mkdir apache
@@ -180,6 +182,8 @@ OVERLAYfs   is docker image file system.
 By difault contner root file system is /var/lib/docker/volue    (native place )
 Docker Volume :-
 we can creater docker volume tow type
+custom place
+nativ place
 Selinux always not allow volume mount for docker contner
 for solustion
 1)  desable selinux 
@@ -206,7 +210,21 @@ show databases;
 2)  how to resolve selinux problem ( selinux is in inforce mode)  
 # seteforce 1
 first create contner without volume 
-
+ ls -lZd /var/lib/mysql
+ copy  context type & go docker host
+ chcon -t   pest-context-type /volume
+ ocker run -d -v /volume:/var/lib/mysql --name mysql5.6 -e MYSQL_ROOT_PASSWORD=redhat mysql:5.6
+How to use share volum bitween two contner
+ 
+ docker save centos:web > apache.tar
+ docker load apache.tar
+ How to push image in to docker rigstary
+ 1 centerlize   (docker hub)
+ push image in git hub
+ docker loging
+ docker push docker.io/user_ID/website:v1
+ 2 on primise
+ 
 
 
 
