@@ -111,6 +111,7 @@ kubeadm join 172.31.30.228:6443 --token yuvbxi.yc6mrndw22p6rumd \
     --discovery-token-ca-cert-hash sha256:42833a1689d08c84d3de10712067d2e6da7e43fe35a2cfd24602b8d13bdcda70 
    
 kubectl get node     ( check how many node connect to the master )
+kubectl describe node node_name   ( print log spacic node )
 
 POD Network setup   with SDN technolgy ( depolying network switch pod comunition )
 
