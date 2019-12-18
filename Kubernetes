@@ -123,7 +123,8 @@ $ kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl vers
 ip a s weave   ( check weave network setup on node )
 kubectl get pod -n kube-system   ( check on master it depoly new pod for weave network )
 heare we found DNS auto maticaly up because network depoly.
-
+kubectl run --generator=run-pod/v1 test --image=nginx   (it is in flat deployment ( drow back  kubernet not moniter this if you delete pod new pod will not scal up automaticle)
+kubectl get pod
  kubectl create namespace prod
     kubectl create namespace dev
     kubectl create namespace stage
