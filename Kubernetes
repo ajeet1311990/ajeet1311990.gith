@@ -67,6 +67,14 @@ mkdir -p $HOME/.kube
   sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
   sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
+for token 
+kubeadm token list
+
+for CRt file
+[root@ip-172-31-43-158 ec2-user]# openssl x509 -pubkey \
+> -in /etc/kubernetes/pki/ca.crt | openssl rsa \
+> -pubin -outfrom der 2>/dev/null | openssl dgst \
+> -sha256 -hex | sed 's/^.* //'
 
 three methord work on kubernet
 
