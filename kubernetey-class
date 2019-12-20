@@ -2,7 +2,7 @@ openshift = kubernetes
  Type of Pod Deployments ..
 1)....Flat pod Deployment ( no high avaialbility / scalabelity )  
 have not any monitring if we delete any pod with we flat depolyment none of new pod will depoly automaticaly.
-
+kubectl run --generator=run-pod/v1 test --image=nginx 
 File mathrod
 vi pod.yml
 
