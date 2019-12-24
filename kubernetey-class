@@ -87,6 +87,15 @@ kubectl rollout history deployment nginx-deployment   ( check record )
 kubectl rollout undo deployment  nginx-deployment --to-revision=1
 Service Discovery  : ----
 
+Kube-proxy:  it is software load balancer which disturbute lode over the backend pod ip but it work on pod lebel .
+service IP (if you did not define service ip rang kubadm define 10. serige ip automaticly )
+Service ip : it take single ip against your deployment pod ip. it will necer changes even pod will create or destroy.
+kubectl run test --image=nginex:latest
+kubectl get deployment
+kubectl scale --replicas=3 deployment test
+kubectl get deployment
+kubectl expose deployment test --port=80
+
 
 
 
