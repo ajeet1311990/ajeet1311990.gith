@@ -182,6 +182,16 @@ kubectl delete service test
 kubectl expose deployment test --port=80 --type=NodePort
 kubectl get service 
 
+kubectl run test --image=nginx --replicas=2
+kubectl exec -it test-db5495c67-5mgg8  /bin/bash
+kubectl expose deployment test --port=80
+kubectl get service 
+External IP ...
+
+kubectl delete service test
+kubectl expose deployment test --type=NodePort --port=80
+kubectl get service 
+
 
 
 
