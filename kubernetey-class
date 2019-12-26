@@ -90,11 +90,17 @@ Service Discovery  : ----
 Kube-proxy:  it is software load balancer which disturbute lode over the backend pod ip but it work on pod lebel .
 service IP (if you did not define service ip rang kubadm define 10. serige ip automaticly )
 Service ip : it take single ip against your deployment pod ip. it will necer changes even pod will create or destroy.
-kubectl run test --image=nginex:latest
-kubectl get deployment
-kubectl scale --replicas=3 deployment test
-kubectl get deployment
+
+kubectl run test --image=nginx --replicas=2
+kubectl exec -it test-db5495c67-5mgg8  /bin/bash
 kubectl expose deployment test --port=80
+kubectl get service 
+External IP ...
+
+kubectl delete service test
+kubectl expose deployment test --type=NodePort --port=80
+kubectl get service 
+
 
 
 
