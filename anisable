@@ -1,0 +1,101 @@
+Prerequisite
+
+1 linux server for ansible server
+2 linux server for web-server (172.24.11.144, 172.24.11.235)
+
+
+#update yum repo
+yum update -y
+
+#enable yum epel repo
+yum-config-manager --enable -epel
+
+#Install Ansible
+yum install ansible -y
+
+
+Add connection string for server
+vi /etc/ansible/hosts/
+
+[web-server]
+172.24.11.144 ansible_user=ec2-user ansible_ssh_private_key_file=/home/ec2-user/demo-keys.pem
+172.24.11.235 ansible_user=ec2-user ansible_ssh_pass=pass@123
+
+#Check connectivity
+ansiblle -m ping web-server 
+
+# some basic tasks example
+ansible -m web-server shell -a "ls /home"
+ansible web-server -m shell -a "df -Th"
+ansible web-server -m shell -a "free -m"
+
+#Testing connnectivity without adding usernamae and password in hosts file
+
+vi /etc/ansible/hosts
+remove or put # infront of existing entries
+[web-server]
+#172.24.11.144 ansible_user=ec2-user ansible_ssh_private_key_file=/home/ec2-user/demo-keys.pem
+#172.24.11.235 ansible_user=ec2-user ansible_ssh_pass=pass@123
+172.24.11.144
+172.24.11.235
+
+and Save file
+
+#Now check by using command
+
+ansible web-server -m shell -a "free -m" -u ec2-user --private-key /home/ec2-user/demo-keys.pem
+
+ansible web-server -m shell -a "sudo useradd jitendra; ls -l /home" -u ec2-user --private-key /home/ec2-user/demo-keys.pem
+
+
+******************************************************************
+#using Play Book
+
+#Create playbook file
+vi lamp.yml
+****************************************************
+---
+- hosts: web-server
+  remote_user: ec2-user
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: "Install Apache 2.4"
+      yum:
+        pkg:
+          - httpd24
+        state: present
+
+    - name: "Install PHP 5.6"
+      yum:
+        pkg:
+          - php56
+          - php56-mysqlnd
+        state: present
+
+    - name: "Install MySql 5.6"
+      yum:
+        pkg:       
+          - mysql56-server
+          - mysql56
+        state: present
+
+    - name: "Turn on Httpd and MySQL and set them to run on boot"
+      service: name={{ item }} state=started enabled=yes
+      with_items:
+        - httpd
+        - mysqld
+**********************************************************************
+
+ansible-playbook lamp.yml ---------------(if user and password you have same in config file)
+
+ansible-playbook lamp.yml -u ec2-user --private-key /home/ec2-user/demo-keys.pem   ---either user this
+
+#Check service which you have installed
+
+ansible web-server -m shell -a "sudo service httpd status" -u ec2-user --private-key /home/ec2-user/demo-keys.pem
+
+ansible web-server -m shell -a "sudo service httpd status; php -v" -u ec2-user --private-key /home/ec2-user/demo-keys.pem
+
+
+
