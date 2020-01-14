@@ -1,3 +1,12 @@
+-i  = inventory
+-u  = remort user
+-k  = ssh password
+-b  =  ----------------for sudo privilage-----
+-b  = become
+--become-user = swich user
+-m = modules
+-a = argument
+
 ansible --version
 yum install epel-release -y
 yum install ansible -y
