@@ -1,3 +1,18 @@
+Required :
+
+Ansible - 2.9
+Linux -  6
+Python - 2.6
+
+by default ansible faq value =5
+Ansible work on checksome value
+Inventory conten list of client ip
+
+ansible default module path  :
+/usr/share/My_modules or My_modules_utils
+
+bolt  in ansible used for encryption.
+
 -i  = inventory
 -u  = remort user
 -k  = ssh password
@@ -92,8 +107,11 @@ if we want make default parametar  we have to changn in .ansible.cfg
 HOw to push configuration
 
 1] playbook     : file method
-2] command line : ad hoc method
+2] command line :  ad-hoc 
+
+An ad-hoc command is something that you can run command quickly & directaly on ansible .
 ansible target -m module -a 'key=value'
+
  ansible-doc -l ( list all default module )
 Module define always meening full name 
 example : 
@@ -103,16 +121,22 @@ ansible-doc copy                ( for find argument in copy command)
 
 ansible all -m copy -a 'src=run.sh dest=/home/centos/ owner=manish group=wheel mode=0755' -b
 
-ansible all -m command -a 'cat /etc/passwd'
-ansible all -m command -a 'ls -l /etc/passwd'
-ansible all -m command -a 'cat /home/centos/run.sh' 
+
 ansible all -m copy -a 'src=run.sh dest=/home/centos/ backup=yes'
 ansible all -m fetch -a 'src=/home/centos/run.sh dest=/home/centos/abs'   ( copy node to server )
 ansible all -m file -a 'path=/home/centos/run.sh state=absent'      (delete file from node )
 ansible all -m yum -a 'name=ftp state=installed' -b                 (install package with yum)
 ansible all -m yum -a 'name=ftp state=removed' -b
 
-
+1) ansible all -m ping -u ec2-user -k    ( loging with user & password )
+2) ansible all -m command -a 'free -m'   ( use module)
+3) ansible-doc -l | grep copy  ( Know about module )
+4) ansible-doc copy   (on botom check sentex )
+5) ansible all -m copy -a ;src=test.txt dest=/root/ owner=manish group=while mode=0775'
+6) ansible all -m command -a 'cat /root/test.txt'  (run cooand in ansible )
+7) ansible all -m stat -a 'path=/root/abc.txt'    ( Know complite details of any file)
+8) ansible all -m command -a 'ls -l /root/abc.text '
+9) ansible all -m fetch -a 'src=/etcfstab dest=/tem/backup'   ( copy remort foram master )
 
 
 
