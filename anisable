@@ -136,7 +136,73 @@ ansible all -m yum -a 'name=ftp state=removed' -b
 6) ansible all -m command -a 'cat /root/test.txt'  (run cooand in ansible )
 7) ansible all -m stat -a 'path=/root/abc.txt'    ( Know complite details of any file)
 8) ansible all -m command -a 'ls -l /root/abc.text '
-9) ansible all -m fetch -a 'src=/etcfstab dest=/tem/backup'   ( copy remort foram master )
+9) ansible all -m fetch -a 'src=/etcfstab dest=/tem/backup'   ( copy remort foram master )i
+
+_______Write Play Book _________________________
+ vim p1.yml
+- hosts: all
+  gather_facts: false
+  tasks: 
+   - copy:
+      src: /home/cilredhat/query
+      dest: /home/cilredhat/Desktop
+
+
+Playbook sentax check 
+ansible-playbook p1.yml --syntax-check
+
+Dry Run Play book:
+
+ansible-playbook p1.yml --check
+ansible-playbook p1.yml -C
+ 
+Run Playbook : 
+
+ansible-playbook p1.yml
+
+Passing argument in playbook 
+
+- name: Run copy play book
+  hosts: all
+  gather_facts: false
+  tasks:
+   - name: copyingggggggggg 
+     copy:
+      src: /home/cilredhat/query
+      dest: /home/cilredhat/Desktop
+OR 
+
+- name: Run copy play book
+  hosts: all
+  gather_facts: false
+  tasks:
+   - name: copyingggggggggg
+     copy:
+      src: /home/cilredhat/query
+      dest: /home/cilredhat/Desktop
+   - name: run command module for example
+     command: cat /home/cilredhat/Desktop/query
+     register: mymotd
+----------------------------------How to write multiplay ------------------
+
+- name: Run copy play book
+  hosts: web
+  gather_facts: false
+  tasks:
+   - name: copyingggggggggg
+     copy:
+      src: /home/cilredhat/query
+      dest: /home/cilredhat/Desktop
+
+
+
+- name: Ruu second play
+  hosts: app
+  tasks:
+   - name: service restart
+     service:
+      name: httpd
+      state: restarted
 
 
 
