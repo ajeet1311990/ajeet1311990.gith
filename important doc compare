@@ -1,0 +1,207 @@
+
+host website
+server ip:2087
+user name :  root
+password  :  ***********
+Create a New Account
+Domain
+Username
+Password
+Re-type Password
+create
+************************db-backup*******************************************
+
+mysqldump -u wpindiauser -h compare-infobase-db-new.cbztciobxkoh.ap-southeast-1.rds.amazonaws.com -p wpindia > my-india.sql
+
+*******ftp*
+service proftpd restart
+vim /etc/proftpd.conf ( input ip )
+{for work from home ip allow }
+
+**********URL listing *****************************
+cd  /usr/local/scripts/
+# bash -x url.sh
+domain name
+email id
+password  user name & password ( live ftp )
+
+***** Setup phpMyAdmin on live server ****
+locate phpMyAdmin
+cd /usr/local/src/
+cp phpMyAdmin-4.8.4-all-languages.zip /home/sl27/www/
+cd /home/sl27/www/
+unzip phpMyAdmin-4.8.4-all-languages.zip
+mv phpMyAdmin-4.8.4-all-languages phpMyAdmin
+share :- sl27.in/phpMyAdmin
+
+*************************status***************************************************
+MOI :-
+
+vi /etc/awstats/awstats.mapsofindia.in.conf
+
+/usr/local/awstats/wwwroot/cgi-bin/awstats.pl -update -config=mapsofindia.com -databasebreak=day
+/usr/local/awstats/wwwroot/cgi-bin/awstats.pl -update -config=mapsofindia.com
+
+wifi password ****************************************************************
+1. compare Airtel   
+password :    hello@123
+
+2. ciscocil3
+Password :  Heaven#99
+
+##### Tata les line##########################################
+Hi All,
+We are requested all team member please follow the process when Tata Lease line down
+INTERNET LINE DETAIL
+TATA lease line with 8mbps speed
+Vendor name = Edge Telecom
+For complain
+Circle
+Support no
+
+Level 1
+Service issue/Billing Issue
+Level 2 After Three Hours
+Services Issue
+Level 3 After 6Hrs of SR
+Level 4 After 8Hrs of SR
+Delhi NCR
+
+011-45719242-43 E-Mail: support@edgetelecom.co.in
+
+Chitra Singh
++91 011-45719242
+Chitra@edgetelecom.co.in
+Nikhil Jain
++91 8285556028
+Nikhil@edgetelecom.co.in
+Shoaib Abrar
++91 9540955577
+Shoaib@edgetecom.co.in
+Soma Halder
++91 9654595425
+soma@edgetelecom.co.in
+Ajay Jain level 5
+9871553635
+************access web site mail id on web*******************************************
+
+https://familyofdisabled.org:2096/
+or 
+https://familyofdisabled.org/webmail
+
+******************svn DB lock******************************
+
+cd .svn/
+ ls -a
+mv wc.db wc.db.old
+sqlite3 wc.db.old
+svn cleanup
+svn up
+*************iptables************************
+iptables -A INPUT -m iprange --src-range 66.249.1.1-66.249.240.240 -j DROP
+
+iptables -A INPUT -m iprange --src-range 66.249.1.1-66.249.240.240 -j DROP
+
+
+
+
+How To Install Google Chrome, Selenium & Chromedriver For AWS EC2	1
+yum update
+11 yum check-update
+12 yum list installed | grep -i python3
+13 yum list installed | grep -i python3
+14 yum python3
+15 wget https://www.python.org/ftp/python/3.6.5/Python-3.6.5.tgz
+16 ls
+17 tar zxvf Python-3.6.5.tgz
+18 ls
+19 cd Python-3.6.5/
+20 yum install gcc
+21 ls -a
+22 ./configure --prefix=/opt/python3
+23 make
+24 yum install openssl-devel
+25 make install
+26 ln -s /opt/python3/bin/python3 /usr/bin/python3
+27 python3
+28 python3 -V
+29 clear
+30 cd /tmp/
+31 wget https://chromedriver.storage.googleapis.com/80.0.3987.106/chromedriver_linux64.zip
+32 ls
+33 unzip chromedriver_linux64.zip
+34 mv chromedriver /usr/bin/chromedriver
+35 chromedriver --version
+36 chromedriver --version
+37 chromedriver --V
+38 ls
+39 mv systemd-private-887bee7a61a14170a9462f6664a326da-chronyd.service-f4XB2j/ /usr/bin/
+40 chromedriver --version
+chromedriver
+ mv /usr/bin/systemd-private-887bee7a61a14170a9462f6664a326da-chronyd.service-f4XB2j
+ mv /usr/bin/systemd-private-887bee7a61a14170a9462f6664a326da-chronyd.service-f4XB2j/ /usr/bin/chromedriver .
+chromedriver --version
+chromedriver
+ rm -rf /usr/bin/chromedriver
+curl https://intoli.com/install-google-chrome.sh | bash
+mv /usr/bin/google-chrome-stable /usr/bin/google-chrome
+google-chrome --version
+yum install python3-pip
+pip3 install selenium --user
+cat chromedriver
+cp chromedriver /usr/bin/
+ls /usr/bin/
+chromedriver --version
+ vim test.py
+zimbra mail server........................................................................
+
+ bash -x /usr/local/scripts/backup_allaccounts.sh &
+ 
+
+zmcontrol stop
+zmcontrol start
+zmcontrol satus
+
+mv /opt/zimbra/log/zmmailboxd.pid /tmp/
+
+/opt/zimbra/postfix/sbin/postqueue -p
+
+/opt/zimbra/postfix/sbin/postsuper -d ALL deferred
+--
+cat /var/log/exim_mainlog |grep "vidisha@comparemails.com"
+setup-mail-command-ec2-ubuntu
+apt-get install apache2
+apt-get install mysql-server
+service apache2 restart
+
+
+apt-get install php
+apt-get install php-gd
+apt-get install php-peap
+apt-get install php-mysql
+apt-get install php-curl
+apt-get install php-memcached
+
+apt-get install exim4-daemon-light mailutils
+dpkg-reconfigure exim4-config
+
+
+-- 
+
+
+Thanks & Regards,
+
+Ajeet Yadav
+Compare Infobase Ltd.
+C- 62, Community Centre
+Janakpuri, New Delhi – 58 (India)
+--
+--
+
+
+Thanks & Regards,
+
+Ajeet Yadav
+Compare Infobase Ltd.
+C- 62, Community Centre
+Janakpuri, New Delhi – 58 (India)
