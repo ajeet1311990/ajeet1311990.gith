@@ -9,6 +9,9 @@ Username
 Password
 Re-type Password
 create
+#################zimbra admin##############################################
+
+https://webmail.infobase.in:7071/zimbraAdmin/
 ************************db-backup*******************************************
 
 mysqldump -u wpindiauser -h compare-infobase-db-new.cbztciobxkoh.ap-southeast-1.rds.amazonaws.com -p wpindia > my-india.sql
